@@ -1,29 +1,47 @@
 package aplicaciones.spring.modelo;
 
+import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
-	private String usuario;
+	private String user;
 	private String email;
 	private String direccion;
 	private String telefono;
 	private String tipo;
-	private String pass;
+	private String password;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Producto> producto;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Orden> orden;
 	
 	public Usuario() {
 	}
 	
-	public Usuario(Integer id, String nombre, String usuario, String email, String direccion, String telefono,
-			String tipo, String pass) {
+	public Usuario(Integer id, String nombre, String user, String email, String direccion, String telefono,
+			String tipo, String password) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.usuario = usuario;
+		this.user = user;
 		this.email = email;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.tipo = tipo;
-		this.pass = pass;
+		this.password = password;
 	}
 	
 	
@@ -39,11 +57,11 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getUsernm() {
-		return usuario;
+	public String getUser() {
+		return user;
 	}
-	public void setUsernm(String usuario) {
-		this.usuario = usuario;
+	public void setUser(String user) {
+		this.user = user;
 	}
 	public String getEmail() {
 		return email;
@@ -69,16 +87,24 @@ public class Usuario {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public String getContraseña() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
-	public void setContraseña(String pass) {
-		this.pass = pass;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<Producto> getProducto() {
+		return producto;
+	}
+
+	public void setProducto(List<Producto> producto) {
+		this.producto = producto;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", usuario=" + usuario + ", email=" + email + ", direccion="
-				+ direccion + ", telefono=" + telefono + ", tipo=" + tipo + ", pass=" + pass + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", user=" + user + ", email=" + email + ", direccion="
+				+ direccion + ", telefono=" + telefono + ", tipo=" + tipo + ", password=" + password + "]";
 	}	
 }
